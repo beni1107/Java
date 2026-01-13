@@ -41,7 +41,7 @@ public class Student extends Oseba {
     
     @Override
     public String getOpis() {
-        
+        return "";
     }
 
     public String getVpisnaStevilka() {
@@ -66,7 +66,7 @@ public class Student extends Oseba {
         return Collections.unmodifiableList(this.predmeti);
     }
 
-    public void dodajPredmet(Predmet p) {
+    public void addPredmet(Predmet p) {
         Objects.requireNonNull(p, "Predmet ne more biti null");
         
             if (predmeti.contains(p)) {
@@ -79,11 +79,13 @@ public class Student extends Oseba {
         return Collections.unmodifiableList(this.ocene);
     }
 
-    public void setOcene(List<Izpit> ocene) {
-       Objects.requireNonNull(ocene,"Ocene ne more biti null");
-       if(this.ocene.contains(ocene)) {
+    public void addOcena(Izpit ocena) {
+       Objects.requireNonNull(ocena,"Ocene ne more biti null");
+       if(this.ocene.contains(ocena)) {
            throw new IllegalArgumentException("Ocena ze obstaja");
        }
+       
+       this.ocene.add(ocena);
     }
-    
+   
 }
