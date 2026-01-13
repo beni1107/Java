@@ -1,0 +1,20 @@
+# Ignore compiled Java files
+*.class
+
+# Ignore the build folders (where the running app goes)
+bin/
+out/
+build/
+target/
+
+# Ignore IntelliJ IDEA settings
+.idea/
+*.iml
+
+# Ignore Eclipse settings
+.settings/
+.project
+.classpath
+
+# Ignore Mac system files
+.DS_Store
