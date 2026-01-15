@@ -23,6 +23,16 @@ public class Student extends Oseba {
     private List<Predmet> predmeti;
     private List<Izpit> ocene;
     
+    public Student (String ime, String priimek,String emso, String email, int letoRojstva, String telStevilka, String vp, int letnik) {
+       super(ime, priimek, emso, email, letoRojstva, telStevilka);
+        validateVP(vp);
+        validateLetnik(letnik);
+        this.vpisnaStevilka=vp;
+        this.letnik=letnik;
+        predmeti = new ArrayList<>();
+        ocene = new ArrayList<>();
+    }
+    
     // VALIDATION METHODS
     private static void validateVP(String vp) {
         Objects.requireNonNull(vp,"Vpisna stevilka ne more biti null!");
@@ -33,7 +43,7 @@ public class Student extends Oseba {
     }
     
     private static void validateLetnik(int letnik) {
-        if( letnik < 1  && letnik >4 ) {
+        if( letnik < 1  || letnik >4 ) {
                 throw new IllegalArgumentException("Letnik ni pravilen!");
         }
     }
@@ -41,9 +51,49 @@ public class Student extends Oseba {
     
     @Override
     public String getOpis() {
-        return "";
+        return "Student : "+this.getIme()+" "+
+                this.getPriimek()+" \nEMSO : "+
+                this.getEMSO()+" VPisna : "+this.getVpisnaStevilka()+" \nLetnik :"+
+                this.getLetnik();
     }
-
+    
+    public double getPovprecje() {
+        double sum=0;
+        int count = 0;
+        for( Izpit i : this.ocene) {
+            if(i.getOcena() > 5) {
+                sum+=i.getOcena();
+                count++;
+            }
+        }
+        if (count == 0) {
+            return 0;
+        }
+        return sum/count;
+    }
+    public void getIzpisPodatkov() {
+        System.out.println(this.getOpis());
+        System.out.println("\t ---PRIJAVLJENI PREDMETI---");
+        if( !predmeti.isEmpty()) {
+            for( Predmet p : predmeti) {
+                System.out.println(p.getImePredmeta()+" "+p.getKodaPredmeta());
+            }
+        }else {
+                System.out.println("Student ni prijavljen na noben predmet");
+        } 
+        System.out.println("\t ---OPRAVLJENI IZPITI---");
+        if(!ocene.isEmpty()) {
+            for( Izpit i : ocene) {
+                System.out.println("Predmet :"+i.getPredmet().getImePredmeta()+" Koda "+i.getPredmet().getKodaPredmeta());
+                System.out.println("Ocena :"+i.getOcena());
+            }
+        }else { System.out.println("Ni opravljenih izpitov.");
+               
+        }
+        System.out.println("\nPOVPREČNA OCENA: " + this.getPovprecje());
+            
+        
+    }
     public String getVpisnaStevilka() {
         return vpisnaStevilka;
     }
@@ -66,7 +116,7 @@ public class Student extends Oseba {
         return Collections.unmodifiableList(this.predmeti);
     }
 
-    public void addPredmet(Predmet p) {
+    public void dodajPredmet(Predmet p) {
         Objects.requireNonNull(p, "Predmet ne more biti null");
         
             if (predmeti.contains(p)) {
@@ -79,7 +129,7 @@ public class Student extends Oseba {
         return Collections.unmodifiableList(this.ocene);
     }
 
-    public void addOcena(Izpit ocena) {
+    public void dodajOceno(Izpit ocena) {
        Objects.requireNonNull(ocena,"Ocene ne more biti null");
        if(this.ocene.contains(ocena)) {
            throw new IllegalArgumentException("Ocena ze obstaja");
@@ -87,5 +137,33 @@ public class Student extends Oseba {
        
        this.ocene.add(ocena);
     }
+
+    @Override
+    public int hashCode() {
+        
+        int hash = super.hashCode();
+        hash = 67 * hash + Objects.hashCode(this.vpisnaStevilka);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+          if(!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        return Objects.equals(this.vpisnaStevilka, other.vpisnaStevilka);
+    }
+    
    
 }

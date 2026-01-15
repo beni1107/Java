@@ -8,6 +8,11 @@ package com.beni.javaoop;
  *
  * @author bendz
  */
-public class Profesor {
+public class Profesor extends Oseba {
+
+    @Override
+    public String getOpis() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
