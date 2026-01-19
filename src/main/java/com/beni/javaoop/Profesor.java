@@ -44,7 +44,7 @@ public class Profesor extends Oseba {
                 this.getEMSO()+" Katedra : "+this.katedra;
     }
        
-    }
+    
     
     public void getIzpisPodatkov() {
         System.out.println("\t--- PREDMETI PROFESORJA---");
