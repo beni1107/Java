@@ -15,14 +15,13 @@ import java.util.Objects;
  */
 public class ZunanjiProfesor extends Profesor{
     private String organizacija;
-    private List<Predmet> predmeti;
 
-    public ZunanjiProfesor(String organizacija, String ime, String priimek, String emso, String email, int letoRojstva, String telStevilka) {
-        super(ime, priimek, emso, email, letoRojstva, telStevilka);
-        test
+    public ZunanjiProfesor(String organizacija, String katedra, String ime, String priimek, String emso, String email, int letoRojstva, String telStevilka) {
+        super(katedra, ime, priimek, emso, email, letoRojstva, telStevilka);
         this.organizacija = organizacija;
-        this.predmeti = new ArrayList<>();
     }
+
+    
     
     public String getOrganizacija() {
         return organizacija;
@@ -32,38 +31,10 @@ public class ZunanjiProfesor extends Profesor{
         Objects.requireNonNull(organizacija,"Organizacija ne more biti null");
         this.organizacija = organizacija;
     }
-
-    public List<Predmet> getPredmeti() {
-        return Collections.unmodifiableList(predmeti);
-    }
-
+    
     @Override
-   public String getOpis() {
-       return "Zunanji profesor : "+this.getEmail() + " "+this.getPriimek()+" \n"+
-               " Organizacija :"+this.organizacija+" EMSO :"+this.getEMSO();           
-   }
-   public void izpisPodatkov() {
-       System.out.println("\t---PREDMETI PROFESORJA---");
-       if(!this.predmeti.isEmpty()) {
-           for(Predmet x:predmeti) {
-               System.out.println(x.getImePredmeta()+" "+x.getKodaPredmeta());
-           }
-       }
-       
-    
-    
-}
-    
-    
-    
-    public void dodajPredmet(Predmet p) {
-        Objects.requireNonNull(p,"Predmet ne more biti null");
-        if(!predmeti.contains(p)) {
-            predmeti.add(p);
-        }
-        else {
-            System.out.println("Ta predmet ze obstaja");
-        }
+    public String getOpis() {
+        return super.getOpis()+" | Organizacija: "+this.organizacija;
     }
-    
+  
 }

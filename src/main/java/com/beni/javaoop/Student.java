@@ -61,7 +61,7 @@ public class Student extends Oseba {
         double sum=0;
         int count = 0;
         for( Izpit i : this.ocene) {
-            if(i.getOcena() > 5) {
+            if(i.getOcena() > 6) {
                 sum+=i.getOcena();
                 count++;
             }

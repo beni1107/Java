@@ -5,6 +5,7 @@
 package com.beni.javaoop;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -12,10 +13,21 @@ import java.time.LocalDate;
  */
 public class Izpit {
     private int ocena;
-    private Predmet predmet;
-    private Student s;
-    private LocalDate datum;
+    private final Predmet predmet;
+    private final Student s;
+    private final LocalDate datum;
 
+    public Izpit(int ocena, Predmet predmet, Student s, LocalDate datum) {
+        Objects.requireNonNull(predmet, "Predmet ne more biti null");
+        Objects.requireNonNull(s,"Student ne more biti null");
+        this.setOcena(ocena);
+        
+        this.predmet = predmet;
+        this.s = s;
+        this.datum = datum;
+    }
+
+    
     public int getOcena() {
         return ocena;
     }
@@ -32,28 +44,21 @@ public class Izpit {
         return predmet;
     }
 
-    public void setPredmet(Predmet predmet) {
-        this.predmet = predmet;
-    }
+   
 
     public Student getS() {
         return s;
     }
 
-    public void setS(Student s) {
-        this.s = s;
-    }
+    
 
     public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(LocalDate datum) {
-        this.datum = datum;
-    }
-    
+  
     
     public String getOpis() {
-        return"";
+        return" Student: "+s.getOpis()+" je pri predmetu : "+predmet.getImePredmeta()+" Dne :"+this.datum+" dosegel oceno"+this.ocena;
     }
 }

@@ -72,9 +72,15 @@ public class Predmet {
         }
     }
     public void izpisPodatkov() {
+        System.out.println("-----------------------------------");
+        System.out.println();
         System.out.println("Predmet:"+this.imePredmeta+" "
-                + "koda predmeta : "+this.kodaPredmeta+" "
-                        + "nosilec predmeta "+this.nosilecPredmeta.getIme()+" "+this.nosilecPredmeta.getPriimek());
+                + "koda predmeta : "+this.kodaPredmeta+" ");
+        if(this.nosilecPredmeta == null) {
+                     System.out.println( "Nosilec predmeta ni dodeljen");
+        }else {
+             System.out.println( "nosilec predmeta "+this.nosilecPredmeta.getIme()+" "+this.nosilecPredmeta.getPriimek());
+        }             
         if(prijavljeniStudenti.isEmpty()) {
             System.out.println("Ni prijavljenih studentov");
         }else {
