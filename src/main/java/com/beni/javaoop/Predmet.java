@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author bendz
  */
 public class Predmet {
-    private static final Pattern PATTERN= Pattern.compile("^([A-Z][a-z]*(\\s?))+$");
+    private static final Pattern PATTERN= Pattern.compile("^[A-ZČŠŽ][a-zčšžA-ZČŠŽ0-9]*(\\s[a-zčšžA-ZČŠŽ0-9]*)*$");
 
     private String imePredmeta;
     private final String kodaPredmeta;
@@ -29,7 +29,7 @@ public class Predmet {
         Objects.requireNonNull(ime, "Ime ne more biti null");
         Matcher mathcer = PATTERN.matcher(ime);
         if (!mathcer.matches()) {
-            throw new IllegalArgumentException("Ime in Priimek nista pravilna ");
+            throw new IllegalArgumentException("Ime predmeta ni pravilen nista pravilna ");
         }
     }
     
@@ -85,7 +85,8 @@ public class Predmet {
             System.out.println("Ni prijavljenih studentov");
         }else {
             for (Student s : prijavljeniStudenti) {
-                System.out.println("Student : "+s.getIme()+" "+s.getPriimek()+" "+s.getVpisnaStevilka());
+                
+                s.getIzpisPodatkov();
             }
         }
     }

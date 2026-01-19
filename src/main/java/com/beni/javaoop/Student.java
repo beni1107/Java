@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author bendz
  */
 public class Student extends Oseba {
-    private static final Pattern VP_PATTERN = Pattern.compile("^\\d{6}$");
+    private static final Pattern VP_PATTERN = Pattern.compile("^\\d{4}$");
     
     private String vpisnaStevilka;
     private int letnik;
